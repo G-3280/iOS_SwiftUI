@@ -5,36 +5,29 @@
 //  Created by ParkJunHyuk on 2023/04/30.
 //
 
-import UIKit.UIColor
+import SwiftUI
 
-extension UIColor {
-    convenience init(red: Int, green: Int, blue: Int) {
-        assert(red >= 0 && red <= 255, "Invalid red component")
-        assert(green >= 0 && green <= 255, "Invalid green component")
-        assert(blue >= 0 && blue <= 255, "Invalid blue component")
-        
-        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-    }
+extension Color {
+  init(hex: String) {
+    let scanner = Scanner(string: hex)
+    _ = scanner.scanString("#")
     
-    convenience init(rgb: Int) {
-        self.init(
-            red: (rgb >> 16) & 0xFF,
-            green: (rgb >> 8) & 0xFF,
-            blue: rgb & 0xFF
-        )
-    }
+    var rgb: UInt64 = 0
+    scanner.scanHexInt64(&rgb)
+    
+    let r = Double((rgb >> 16) & 0xFF) / 255.0
+    let g = Double((rgb >>  8) & 0xFF) / 255.0
+    let b = Double((rgb >>  0) & 0xFF) / 255.0
+    self.init(red: r, green: g, blue: b)
+  }
 }
 
-extension UIColor {
-    static var customDarkGreen: UIColor {
-        return UIColor(rgb: 0x38B274)
-    }
+
+extension Color {
     
-    static var customGreen: UIColor {
-        return UIColor(rgb: 0x34E18B)
-    }
-    static var customAccentGreen: UIColor {
-        return UIColor(rgb: 0x93FB62)
-    }
+    static let customDarkGreen = Color(hex: "38B274")
+    static let customGreen = Color(hex: "34E18B")
+    static let customAccentGreen = Color(hex: "93FB62")
+    
 }
 
