@@ -8,14 +8,45 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var selectedTab = 0
+    let unselectedColor = Color(hex: "B1B1B1")
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView(selection: $selectedTab){
+            HomeView()
+                .tabItem {
+                    selectedTab == 0 ? Image("homeFill") : Image("home")
+                    Text("홈")
+                }
+                .tag(0)
+            
+            MissionView()
+                .tabItem {
+                    selectedTab == 1 ? Image("missionFill") : Image("mission")
+                    Text("미션")
+                }
+                .tag(1)
+            
+            EvaluationView()
+                .tabItem {
+                    selectedTab == 2 ? Image("evaluationFill") : Image("evaluation")
+                    Text("미션")
+                }
+                .tag(2)
+            
+            SettingView()
+                .tabItem {
+                    selectedTab == 3 ? Image("settingFill") : Image("setting")
+                    Text("미션")
+                }
+                .tag(3)
         }
-        .padding()
+        .tint(.customDarkGreen)
+
+    }
+    init() {
+        UITabBar.appearance().unselectedItemTintColor = UIColor(unselectedColor)
     }
 }
 
