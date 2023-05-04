@@ -8,9 +8,16 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var selectedTab = false
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            TabView {
+                ForEach(haveCharacterCard) { card in
+                    CharacterCardView(cardData: card)
+                }
+            }
+            .tabViewStyle(PageTabViewStyle())
+            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+        }
     }
 }
 

@@ -31,14 +31,14 @@ struct ContentView: View {
             EvaluationView()
                 .tabItem {
                     selectedTab == 2 ? Image("evaluationFill") : Image("evaluation")
-                    Text("미션")
+                    Text("평가")
                 }
                 .tag(2)
             
             SettingView()
                 .tabItem {
                     selectedTab == 3 ? Image("settingFill") : Image("setting")
-                    Text("미션")
+                    Text("더보기")
                 }
                 .tag(3)
         }
