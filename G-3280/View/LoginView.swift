@@ -17,6 +17,9 @@ struct LoginView: View {
     @State private var loginId = ""
     @State private var loginPw = ""
     @FocusState private var focusedField: Field?
+    @State private var isLogin = false
+    
+    @StateObject private var authViewModel: AuthViewModel = AuthViewModel()
     
     var body: some View {
         NavigationStack {
@@ -57,7 +60,9 @@ struct LoginView: View {
                     .padding(.bottom, 24)
                     
                     Button(action: {
-                        
+                        Task {
+                            await authViewModel.loginFirebase(email: loginId, password: loginPw)
+                        }
                     }){
                         Text("로그인")
                             .foregroundColor(.white)

@@ -8,21 +8,28 @@
 import SwiftUI
 import FirebaseCore
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-       didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-
-    return true
-  }
-}
+//class AppDelegate: NSObject, UIApplicationDelegate {
+//  func application(_ application: UIApplication,
+//       didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+//    FirebaseApp.configure()
+//
+//    return true
+//  }
+//}
 
 @main
 struct G_3280App: App {
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
+//    @StateObject private var viewModel = AuthViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            LoginView()
-//            ContentView()
+            ContentView()
+//                .environmentObject(viewModel)
         }
     }
 }
