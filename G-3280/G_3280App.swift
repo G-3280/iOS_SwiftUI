@@ -21,7 +21,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct G_3280App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView()
+//            ContentView()
         }
     }
 }

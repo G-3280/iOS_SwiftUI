@@ -28,6 +28,8 @@ extension Color {
     static let customDarkGreen = Color(hex: "38B274")
     static let customGreen = Color(hex: "34E18B")
     static let customAccentGreen = Color(hex: "93FB62")
+    static let customGray = Color(hex: "DBD9D9")
+    static let customBackGray = Color(hex: "FBFBFD")
     
 }
 
