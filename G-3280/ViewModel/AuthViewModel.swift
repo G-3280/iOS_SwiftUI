@@ -13,12 +13,16 @@ class AuthViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var isLoggedIn = false
+    @AppStorage("user_uid") var userUid: String = ""
+    
     
     func loginFirebase(email: String, password: String) async {
         do {
-            try await Auth.auth().signIn(withEmail: email, password: password)
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
             await MainActor.run(body: {
                 print("성공")
+                self.userUid = result.user.uid
+                print(userUid)
                 withAnimation(.easeInOut) { self.isLoggedIn = true }
             })
         } catch {
@@ -29,5 +33,34 @@ class AuthViewModel: ObservableObject {
             })
         }
     }
+    
+    func logoutFirebase() async {
+        do {
+            try Auth.auth().signOut()
+            await MainActor.run(body: {
+                self.isLoggedIn = false
+            })
+        } catch {
+//            throw error
+        }
+    }
+    
+//    func loginFirebase(email: String, password: String) {
+//        Task{
+//            do {
+//                try await Auth.auth().signIn(withEmail: email, password: password)
+//                await MainActor.run(body: {
+//                    print("성공")
+//                    withAnimation(.easeInOut) { self.isLoggedIn = true }
+//                })
+//            } catch {
+//                print("Failed to log in with error: \(error.localizedDescription)")
+//                await MainActor.run(body: {
+//                    print("실패")
+//                    withAnimation(.easeInOut) { self.isLoggedIn = false }
+//                })
+//            }
+//        }
+//    }
     
 }

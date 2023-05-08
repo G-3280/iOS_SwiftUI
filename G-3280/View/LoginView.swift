@@ -19,7 +19,7 @@ struct LoginView: View {
     @FocusState private var focusedField: Field?
     @State private var isLogin = false
     
-    @StateObject private var authViewModel: AuthViewModel = AuthViewModel()
+    @EnvironmentObject var authViewModel : AuthViewModel
     
     var body: some View {
         NavigationStack {

@@ -8,8 +8,26 @@
 import SwiftUI
 
 struct SettingView: View {
+    
+    @EnvironmentObject var viewModel: AuthViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            
+        }.toolbar {
+            Text("\(viewModel.email) 님")
+
+            Spacer()
+
+            Button("로그아웃") {
+                Task {
+                    await viewModel.logoutFirebase()
+                }
+            }
+        }
+        .onAppear {
+            print(viewModel.isLoggedIn)
+        }
     }
 }
 

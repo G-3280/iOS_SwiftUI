@@ -24,12 +24,12 @@ struct G_3280App: App {
         FirebaseApp.configure()
     }
     
-//    @StateObject private var viewModel = AuthViewModel()
+    @StateObject private var viewModel = AuthViewModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-//                .environmentObject(viewModel)
+                .environmentObject(viewModel)
         }
     }
 }
