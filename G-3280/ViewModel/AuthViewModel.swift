@@ -41,26 +41,7 @@ class AuthViewModel: ObservableObject {
                 self.isLoggedIn = false
             })
         } catch {
-//            throw error
+            print("Failed to log in with error: \(error.localizedDescription)")
         }
     }
-    
-//    func loginFirebase(email: String, password: String) {
-//        Task{
-//            do {
-//                try await Auth.auth().signIn(withEmail: email, password: password)
-//                await MainActor.run(body: {
-//                    print("성공")
-//                    withAnimation(.easeInOut) { self.isLoggedIn = true }
-//                })
-//            } catch {
-//                print("Failed to log in with error: \(error.localizedDescription)")
-//                await MainActor.run(body: {
-//                    print("실패")
-//                    withAnimation(.easeInOut) { self.isLoggedIn = false }
-//                })
-//            }
-//        }
-//    }
-    
 }

@@ -17,12 +17,12 @@ struct LoginView: View {
     @State private var loginId = ""
     @State private var loginPw = ""
     @FocusState private var focusedField: Field?
-    @State private var isLogin = false
+    @State var stack: [Int] = []
     
     @EnvironmentObject var authViewModel : AuthViewModel
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $stack) {
             ZStack {
                 Color.customBackGray
                     .edgesIgnoringSafeArea(.all)
@@ -82,9 +82,15 @@ struct LoginView: View {
                             .foregroundColor(Color(hex: "DBD9D9"))
                             .frame(height: 27)
                         
-                        NavigationLink("회원가입") {
-                            SignUpView()
-                        }.foregroundColor(Color(hex: "B1B1B1"))
+                        Button {
+                            stack.append(1)
+                        } label: {
+                            Text("회원가입")
+                                .foregroundColor(Color(hex: "B1B1B1"))
+                        }
+                        .navigationDestination(for: Int.self) { int in
+                            SignUpView(stack: $stack)
+                        }
                     }
                     .padding(.trailing, 10)
                     
