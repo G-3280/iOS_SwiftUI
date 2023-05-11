@@ -9,19 +9,18 @@ import SwiftUI
 import FirebaseAuth
 
 struct ContentView: View {
-   
-//    @StateObject var viewModel = AuthViewModel()
     @EnvironmentObject var viewModel : AuthViewModel
     
     var body: some View {
-        VStack{
-            if viewModel.isLoggedIn {
-                MainView()
-            } else {
-                LoginView()
-                    .onAppear{
-                        print("Login")
-                    }
+        ZStack {
+            Color.customBackGray
+                .edgesIgnoringSafeArea(.all)
+            VStack{
+                if viewModel.isLoggedIn {
+                    MainView()
+                } else {
+                    LoginView()
+                }
             }
         }
         .onAppear {
