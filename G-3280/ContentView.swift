@@ -12,22 +12,23 @@ struct ContentView: View {
     @EnvironmentObject var viewModel : AuthViewModel
     
     var body: some View {
-        ZStack {
-            Color.customBackGray
-                .edgesIgnoringSafeArea(.all)
-            VStack{
-                if viewModel.isLoggedIn {
-                    MainView()
-                } else {
-                    LoginView()
-                }
-            }
-        }
-        .onAppear {
-            if Auth.auth().currentUser != nil && Auth.auth().currentUser?.uid == viewModel.userUid {
-                viewModel.isLoggedIn = true
-            }
-        }
+        MainView()
+//        ZStack {
+//            Color.customBackGray
+//                .edgesIgnoringSafeArea(.all)
+//            VStack{
+//                if viewModel.isLoggedIn {
+//                    MainView()
+//                } else {
+//                    LoginView()
+//                }
+//            }
+//        }
+//        .onAppear {
+//            if Auth.auth().currentUser != nil && Auth.auth().currentUser?.uid == viewModel.userUid {
+//                viewModel.isLoggedIn = true
+//            }
+//        }
     }
 }
 

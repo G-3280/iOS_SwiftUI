@@ -33,6 +33,9 @@
 		3F7C96A82A0CA8AD00C10436 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7C96A72A0CA8AD00C10436 /* FirebaseFirestoreCombine-Community */; };
 		3F7C96AA2A0CA8AD00C10436 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7C96A92A0CA8AD00C10436 /* FirebaseFirestoreSwift */; };
 		3F7C96AC2A0CA8AD00C10436 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 3F7C96AB2A0CA8AD00C10436 /* FirebaseMessaging */; };
+		3F7C96B02A0E203100C10436 /* MissionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7C96AF2A0E203100C10436 /* MissionModel.swift */; };
+		3F7C96B22A0E3D7100C10436 /* MissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7C96B12A0E3D7100C10436 /* MissionViewModel.swift */; };
+		3F7C96B42A0E3E1100C10436 /* MissionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7C96B32A0E3E1100C10436 /* MissionCardView.swift */; };
 		3FF9D4982A023CA500973C55 /* CharacterCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9D4972A023CA500973C55 /* CharacterCardView.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +61,9 @@
 		3F7C96922A07E56F00C10436 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3F7C96962A08E91C00C10436 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		3F7C96982A0B35C400C10436 /* CompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedView.swift; sourceTree = "<group>"; };
+		3F7C96AF2A0E203100C10436 /* MissionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionModel.swift; sourceTree = "<group>"; };
+		3F7C96B12A0E3D7100C10436 /* MissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionViewModel.swift; sourceTree = "<group>"; };
+		3F7C96B32A0E3E1100C10436 /* MissionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionCardView.swift; sourceTree = "<group>"; };
 		3FF9D4972A023CA500973C55 /* CharacterCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,13 +137,14 @@
 			isa = PBXGroup;
 			children = (
 				3F61AAF729FF7EF200AABC4D /* MissionView.swift */,
+				3F7C96B32A0E3E1100C10436 /* MissionCardView.swift */,
 				3F3147D729FF982700BAECFC /* EvaluationView.swift */,
 				3F3147D929FF983300BAECFC /* SettingView.swift */,
 				3FF9D4972A023CA500973C55 /* CharacterCardView.swift */,
 				3F61AAF529FF7ED500AABC4D /* HomeView.swift */,
 				3F4B9F932A04EAE300E6AD03 /* LoginView.swift */,
-				3F4B9F952A04EB0400E6AD03 /* SignUpView.swift */,
 				3F4B9F972A04EB3300E6AD03 /* LottieView.swift */,
+				3F4B9F952A04EB0400E6AD03 /* SignUpView.swift */,
 				3F4B9F9B2A04EB6200E6AD03 /* LoadingView.swift */,
 				3F7C96922A07E56F00C10436 /* MainView.swift */,
 				3F7C96982A0B35C400C10436 /* CompletedView.swift */,
@@ -149,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				3F73D08D2A02A38B00794C96 /* CharacterModel.swift */,
+				3F7C96AF2A0E203100C10436 /* MissionModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -158,6 +166,7 @@
 			children = (
 				3F7C968E2A07A80500C10436 /* AuthViewModel.swift */,
 				3F7C96962A08E91C00C10436 /* SignUpViewModel.swift */,
+				3F7C96B12A0E3D7100C10436 /* MissionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -246,12 +255,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F7C96B22A0E3D7100C10436 /* MissionViewModel.swift in Sources */,
 				3F61AAD429FE397700AABC4D /* ContentView.swift in Sources */,
 				3F61AAF629FF7ED500AABC4D /* HomeView.swift in Sources */,
 				3F7C96992A0B35C400C10436 /* CompletedView.swift in Sources */,
 				3F7C96972A08E91C00C10436 /* SignUpViewModel.swift in Sources */,
 				3F3147D829FF982700BAECFC /* EvaluationView.swift in Sources */,
 				3F3147DA29FF983300BAECFC /* SettingView.swift in Sources */,
+				3F7C96B42A0E3E1100C10436 /* MissionCardView.swift in Sources */,
 				3FF9D4982A023CA500973C55 /* CharacterCardView.swift in Sources */,
 				3F4B9F962A04EB0400E6AD03 /* SignUpView.swift in Sources */,
 				3F7C968F2A07A80500C10436 /* AuthViewModel.swift in Sources */,
@@ -260,6 +271,7 @@
 				3F61AAD229FE397700AABC4D /* G_3280App.swift in Sources */,
 				3F4B9F942A04EAE300E6AD03 /* LoginView.swift in Sources */,
 				3F61AAF829FF7EF200AABC4D /* MissionView.swift in Sources */,
+				3F7C96B02A0E203100C10436 /* MissionModel.swift in Sources */,
 				3F4B9F9C2A04EB6200E6AD03 /* LoadingView.swift in Sources */,
 				3F7C96932A07E56F00C10436 /* MainView.swift in Sources */,
 				3F4B9F982A04EB3300E6AD03 /* LottieView.swift in Sources */,
