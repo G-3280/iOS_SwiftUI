@@ -13,20 +13,20 @@ struct SettingView: View {
     
     var body: some View {
         VStack {
-            
-        }.toolbar {
-            Text("\(viewModel.email) 님")
-
-            Spacer()
-
-            Button("로그아웃") {
-                Task {
-                    await viewModel.logoutFirebase()
-                }
-            }
-        }
-        .onAppear {
-            print(viewModel.isLoggedIn)
+//
+//        }.toolbar {
+//            Text("\(viewModel.email) 님")
+//
+//            Spacer()
+//
+//            Button("로그아웃") {
+//                Task {
+//                    await viewModel.logoutFirebase()
+//                }
+//            }
+//        }
+//        .onAppear {
+//            print(viewModel.isLoggedIn)
         }
     }
 }

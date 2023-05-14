@@ -45,6 +45,9 @@ struct MainView: View {
                     .tag(3)
             }
             .tint(.customDarkGreen)
+            .onAppear() {
+                UITabBar.appearance().backgroundColor = UIColor(.white)
+            }
         }
 
     }

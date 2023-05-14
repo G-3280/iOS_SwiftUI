@@ -31,5 +31,9 @@ extension Color {
     static let customGray = Color(hex: "DBD9D9")
     static let customBackGray = Color(hex: "FBFBFD")
     
+    static let customMissionGreen = Color(hex: "9AEDA5")
+    static let customMissionBarGray = Color(hex: "A9A9A9")
+    static let customMissionGray = Color(hex: "D7D2D2")
+    
 }
 
