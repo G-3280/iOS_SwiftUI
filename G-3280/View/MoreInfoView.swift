@@ -9,6 +9,9 @@ import SwiftUI
 
 struct MoreInfoView: View {
     
+    @EnvironmentObject var userInfoViewModel: UserInfoViewModel
+    @EnvironmentObject var authViewModel : AuthViewModel
+    
     @State var nowMissionCount: Double = 20
     @State var totalMissionCount: Double = 20
     
@@ -56,7 +59,7 @@ struct MoreInfoView: View {
     @ViewBuilder
     private var TopBarView: some View {
         HStack {
-            Text("박준혁 님")
+            Text("\(userInfoViewModel.user!.nickName) 님")
                 .font(.title2)
                 .fontWeight(.bold)
             
@@ -64,7 +67,7 @@ struct MoreInfoView: View {
             
             Button {
                 Task {
-//                    await viewModel.logoutFirebase()
+                    await authViewModel.logoutFirebase()
                 }
             } label: {
                 Text("로그아웃")

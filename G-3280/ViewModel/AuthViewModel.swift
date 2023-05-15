@@ -8,7 +8,7 @@
 import SwiftUI
 import Firebase
 
-class AuthViewModel: ObservableObject {
+final class AuthViewModel: ObservableObject {
     
     @Published var email: String = ""
     @Published var password: String = ""

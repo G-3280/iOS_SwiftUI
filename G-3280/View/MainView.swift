@@ -12,6 +12,7 @@ struct MainView: View {
     let unselectedColor = Color(hex: "B1B1B1")
     
     @EnvironmentObject var viewModel : AuthViewModel
+    @EnvironmentObject var userInfoViewModel: UserInfoViewModel
     
     var body: some View {
         NavigationStack{
