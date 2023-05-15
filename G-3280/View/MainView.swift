@@ -37,7 +37,7 @@ struct MainView: View {
                     }
                     .tag(2)
                 
-                SettingView()
+                MoreInfoView()
                     .tabItem {
                         selectedTab == 3 ? Image("settingFill") : Image("setting")
                         Text("더보기")
