@@ -19,7 +19,8 @@ struct LoginView: View {
     @FocusState private var focusedField: Field?
     @State var stack: [Int] = []
     
-    @EnvironmentObject var authViewModel : AuthViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var userInfoViewModel: UserInfoViewModel
     
     var body: some View {
         NavigationStack(path: $stack) {
@@ -62,6 +63,9 @@ struct LoginView: View {
                     Button(action: {
                         Task {
                             await authViewModel.loginFirebase(email: loginId, password: loginPw)
+                            if authViewModel.isLoggedIn == true {
+                                await userInfoViewModel.fetchUser()
+                            }
                         }
                     }){
                         Text("로그인")

@@ -10,23 +10,28 @@ import FirebaseAuth
 
 struct ContentView: View {
     @EnvironmentObject var viewModel : AuthViewModel
+    @StateObject var userInfoViewModel: UserInfoViewModel = UserInfoViewModel()
     
     var body: some View {
-//        MainView()
         ZStack {
             Color.customBackGray
                 .edgesIgnoringSafeArea(.all)
             VStack{
                 if viewModel.isLoggedIn {
                     MainView()
+                        .environmentObject(userInfoViewModel)
                 } else {
                     LoginView()
+                        .environmentObject(userInfoViewModel)
                 }
             }
         }
         .onAppear {
             if Auth.auth().currentUser != nil && Auth.auth().currentUser?.uid == viewModel.userUid {
                 viewModel.isLoggedIn = true
+                Task {
+                    await userInfoViewModel.fetchUser()
+                }
             }
         }
     }
