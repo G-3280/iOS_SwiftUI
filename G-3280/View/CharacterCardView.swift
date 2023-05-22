@@ -17,7 +17,7 @@ struct CharacterCardView: View {
                 VStack {
                     ForEach(Array(cardData.name), id: \.self) { letter in
                         Text(String(letter))
-                            .font(.system(size: 50))
+                            .font(.system(size: 40))
                             .fontWeight(.bold)
                     }
                 }
@@ -47,8 +47,8 @@ struct CharacterCardView: View {
     }
 }
 
-struct CharacterCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        CharacterCardView(cardData: haveCharacterCard[0])
-    }
-}
+//struct CharacterCardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CharacterCardView()
+//    }
+//}

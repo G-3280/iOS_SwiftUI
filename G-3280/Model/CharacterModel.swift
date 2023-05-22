@@ -7,12 +7,98 @@
 
 import SwiftUI
 
-struct Character: Identifiable {
-    let id = UUID()
-    let name: String
-    let species: String
-    let backColor: Color
-    let image: String
+enum Character {
+    case penguin
+    case redPanda
+    case redFox
+    case polarBear
+    case turtle
+    case marten
+    
+    init?(imageName: String) {
+        switch imageName {
+        case "penguin":
+            self = .penguin
+        case "redPanda":
+            self = .redPanda
+        case "redFox":
+            self = .redFox
+        case "PolarBear":
+            self = .polarBear
+        case "turtle":
+            self = .turtle
+        case "marten":
+            self = .marten
+        default:
+            return nil
+        }
+    }
+    
+    var name: String {
+        switch self {
+        case .penguin:
+            return "뽀"
+        case .redPanda:
+            return "호"
+        case .redFox:
+            return "호"
+        case .polarBear:
+            return "고미"
+        case .turtle:
+            return "부기"
+        case .marten:
+            return "다미"
+        }
+    }
+    
+    var species: String {
+        switch self {
+        case .penguin:
+            return "황제팽귄"
+        case .redPanda:
+            return "랜서판다"
+        case .redFox:
+            return "붉은여우"
+        case .polarBear:
+            return "북극곰"
+        case .turtle:
+            return "바다거북"
+        case .marten:
+            return "아기담비"
+        }
+    }
+    
+    var backColor: Color {
+        switch self {
+        case .penguin:
+            return Color(hex: "F0D8D8")
+        case .redPanda:
+            return Color(hex: "CFF2C9")
+        case .redFox:
+            return Color(hex: "F2E9C9")
+        case .polarBear:
+            return Color(hex: "F2C9C9")
+        case .turtle:
+            return Color(hex: "C9E8F2")
+        case .marten:
+            return Color(hex: "DBC9F2")
+        }
+    }
+    
+    var image: String {
+        switch self {
+        case .penguin:
+            return "penguin"
+        case .redPanda:
+            return "redPanda"
+        case .redFox:
+            return "redFox"
+        case .polarBear:
+            return "PolarBear"
+        case .turtle:
+            return "turtle"
+        case .marten:
+            return "marten"
+        }
+    }
 }
-
-let haveCharacterCard: [Character] = [Character(name: "뽀", species: "황제팽귄", backColor: Color(hex: "F0D8D8"), image: "penguin"), Character(name: "호", species: "랜서판다", backColor: Color(hex: "CFF2C9"), image: "redPanda")]
