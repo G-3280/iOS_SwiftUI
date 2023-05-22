@@ -7,6 +7,19 @@
 
 import Foundation
 
+enum missionInfo: String, CaseIterable {
+    case today = "일일미션"
+    case Week = "주간미션"
+}
+
+enum missionCategory: String, CaseIterable {
+    case none = "All"
+    case water = "물 아껴쓰기"
+    case food = "음식물 쓰래기 줄이기"
+    case electricity = "전기 아껴쓰기"
+    case recycle = "분리수거 잘하기"
+}
+
 struct Mission: Identifiable {
     let id = UUID()
     let type: String

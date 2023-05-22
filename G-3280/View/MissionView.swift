@@ -14,6 +14,8 @@ struct MissionView: View {
     @Namespace private var missionAnimation
     @Namespace private var missionCategoryAnimation
     
+    @State private var currentTime: String = ""
+    
     var body: some View {
         ZStack{
             Color.customBackGray
@@ -63,8 +65,11 @@ struct MissionView: View {
             }
             .padding(.bottom, 1)
             
-            Text("4월 26일")
+            Text(currentTime)
                 .foregroundColor(.customMissionBarGray)
+                .onAppear {
+                    currentTime = getCurrentTime()
+                }
         }
     }
     
@@ -138,15 +143,10 @@ struct MissionView_Previews: PreviewProvider {
     }
 }
 
-enum missionInfo: String, CaseIterable {
-    case today = "일일미션"
-    case Week = "주간미션"
-}
-
-enum missionCategory: String, CaseIterable {
-    case none = "All"
-    case water = "물 아껴쓰기"
-    case food = "음식물 쓰래기 줄이기"
-    case electricity = "전기 아껴쓰기"
-    case recycle = "분리수거 잘하기"
+func getCurrentTime() -> String {
+    let nowDate = Date()
+    var formatter = DateFormatter()
+    formatter.locale = Locale(identifier: "ko")
+    formatter.dateFormat = "M월 dd일"
+    return formatter.string(from: Date())
 }
