@@ -8,19 +8,43 @@
 import Foundation
 
 enum missionInfo: String, CaseIterable {
-    case today = "일일미션"
-    case Week = "주간미션"
+    case today = "today"
+    case week = "week"
+    
+    func stringValue() -> String {
+        switch self {
+        case .today:
+            return "일일미션"
+        case .week:
+            return "주간미션"
+        }
+    }
 }
 
 enum missionCategory: String, CaseIterable {
-    case none = "All"
-    case water = "물 아껴쓰기"
-    case food = "음식물 쓰래기 줄이기"
-    case electricity = "전기 아껴쓰기"
-    case recycle = "분리수거 잘하기"
+    case none = "none"
+    case water = "water"
+    case food = "food"
+    case electricity = "electricity"
+    case recycle = "recycle"
+    
+    func stringValue() -> String {
+        switch self {
+        case .none:
+            return "All"
+        case .water:
+            return "물 아껴쓰기"
+        case .food:
+            return "음식물 쓰래기 줄이기"
+        case .electricity:
+            return "전기 아껴쓰기"
+        case .recycle:
+            return "분리수거 잘하기"
+        }
+    }
 }
 
-struct Mission: Identifiable {
+struct Mission: Identifiable, Hashable{
     let id = UUID()
     let type: String
     let category: String
@@ -29,7 +53,7 @@ struct Mission: Identifiable {
 }
 
 let missionData: [Mission] = [Mission(type: "today", category: "water", name: "양치컵에 물을 받아서 양치해요!", isCompleted: true),
-                              Mission(type: "weak", category: "food", name: "양치컵에 물을 받아서 양치해요!", isCompleted: false),
+                              Mission(type: "week", category: "food", name: "양치컵에 물을 받아서 양치해요!", isCompleted: false),
                               Mission(type: "today", category: "electricity", name: "양치컵에 물을 받아서 양치해요!", isCompleted: false),
-                              Mission(type: "weak", category: "water", name: "양치컵에 물을 받아서 양치해요!", isCompleted: false),
+                              Mission(type: "week", category: "water", name: "양치컵에 물을 받아서 양치해요!", isCompleted: false),
                               Mission(type: "today", category: "food", name: "양치컵에 물을 받아서 양치해요!", isCompleted: false)]
