@@ -59,7 +59,7 @@ struct MoreInfoView: View {
     @ViewBuilder
     private var TopBarView: some View {
         HStack {
-            Text("\(userInfoViewModel.user!.nickName) 님")
+            Text("\(userInfoViewModel.user?.nickName ?? "") 님")
                 .font(.title2)
                 .fontWeight(.bold)
             
@@ -202,6 +202,7 @@ struct MoreInfoView: View {
 struct MoreInfoView_Previews: PreviewProvider {
     static var previews: some View {
         MoreInfoView()
+            .environmentObject(UserInfoViewModel())
     }
 }
 

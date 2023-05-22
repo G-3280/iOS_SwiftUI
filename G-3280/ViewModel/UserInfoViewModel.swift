@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-final class UserInfoViewModel: ObservableObject {
+class UserInfoViewModel: ObservableObject {
     @Published var user: UserModel?
     @Published var isLoading: Bool = false
     
