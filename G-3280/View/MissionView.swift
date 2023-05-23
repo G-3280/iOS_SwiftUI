@@ -9,10 +9,14 @@ import SwiftUI
 
 struct MissionView: View {
     
+    @StateObject var missionViewModel = MissionViewModel()
+    
     @State private var selectedMission: missionInfo = .today
     @State private var selectedMissionCategory: missionCategory = .none
     @Namespace private var missionAnimation
     @Namespace private var missionCategoryAnimation
+    
+    @State private var currentTime: String = ""
     
     var body: some View {
         ZStack{
@@ -29,7 +33,7 @@ struct MissionView: View {
                 .padding(.horizontal, 28)
                 .padding(.top, 20)
                 
-                List(missionData) { data in
+                List(missionViewModel.nowMission) { data in
                     MissionCardView(cardData: data)
                         .padding(.horizontal, 28)
                         .listRowBackground(Color.clear)
@@ -37,7 +41,6 @@ struct MissionView: View {
                         .shadow(color: Color.customGray ,radius: 5)
                 }
                 .listStyle(.plain)
-                
             }
         }
             
@@ -63,8 +66,11 @@ struct MissionView: View {
             }
             .padding(.bottom, 1)
             
-            Text("4월 26일")
+            Text(currentTime)
                 .foregroundColor(.customMissionBarGray)
+                .onAppear {
+                    currentTime = missionViewModel.getCurrentTime()
+                }
         }
     }
     
@@ -80,7 +86,7 @@ struct MissionView: View {
                             .matchedGeometryEffect(id: "info", in: missionAnimation)
                     }
                     
-                    Text(item.rawValue)
+                    Text(item.stringValue())
                         .frame(maxWidth: .infinity/4, minHeight: 50)
                         .font(.subheadline)
                         .foregroundColor(selectedMission == item ? .black: .customMissionBarGray)
@@ -89,6 +95,7 @@ struct MissionView: View {
                     withAnimation(.easeInOut) {
                         self.selectedMission = item
                         self.selectedMissionCategory = .none
+                        missionViewModel.updateNowMissionForCategory(info: selectedMission, category: selectedMissionCategory)
                     }
                 }
             }
@@ -108,7 +115,7 @@ struct MissionView: View {
                     }
                     
                     if item == .none {
-                        Text(item.rawValue)
+                        Text(item.stringValue())
                             .foregroundColor(selectedMissionCategory == item ? .black: .customMissionGray)
                             .frame(maxWidth: 20, maxHeight: 20)
                             .padding(.horizontal)
@@ -124,6 +131,7 @@ struct MissionView: View {
                 .onTapGesture {
                     withAnimation(.easeInOut) {
                         self.selectedMissionCategory = item
+                        missionViewModel.updateNowMissionForCategory(info: selectedMission, category: selectedMissionCategory)
                     }
                 }
             }
@@ -136,17 +144,4 @@ struct MissionView_Previews: PreviewProvider {
     static var previews: some View {
         MissionView()
     }
-}
-
-enum missionInfo: String, CaseIterable {
-    case today = "일일미션"
-    case Week = "주간미션"
-}
-
-enum missionCategory: String, CaseIterable {
-    case none = "All"
-    case water = "물 아껴쓰기"
-    case food = "음식물 쓰래기 줄이기"
-    case electricity = "전기 아껴쓰기"
-    case recycle = "분리수거 잘하기"
 }
