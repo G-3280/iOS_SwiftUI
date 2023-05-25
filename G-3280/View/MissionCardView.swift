@@ -12,23 +12,25 @@ struct MissionCardView: View {
     var cardData: Mission
     
     var body: some View {
-        HStack(alignment: .center, spacing: 50) {
+        HStack(alignment: .center) {
             VStack(alignment: .leading) {
                 HStack{
-                    Image("seleted_\(cardData.category)")
+                    Image("seleted_\(cardData.type)")
                         .resizable()
                         .frame(width:20, height: 20)
                     
-                    Text("물 아껴쓰기")
+                    Text("\(cardData.title)")
                         .foregroundColor(.customMissionGray)
                         .font(.subheadline)
                 }
                 
-                Text(cardData.name)
+                Text(cardData.description)
                     .font(.headline)
                     .fontWeight(.bold)
-                    
+                    .fixedSize(horizontal: true, vertical: false)
             }
+            
+            Spacer()
             
             if cardData.isCompleted {
                 Image(systemName: "checkmark.circle.fill")
@@ -36,19 +38,19 @@ struct MissionCardView: View {
                     .foregroundColor(.customMissionGreen)
                     .frame(width: 40, height: 40)
             } else {
-                Spacer()
+                EmptyView()
                     .frame(width: 40, height: 40)
             }
             
         }
-        .frame(width: 341, height: 87)
+        .padding()
         .background(Color.white)
         .cornerRadius(20)
     }
 }
 
-struct MissionCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        MissionCardView(cardData: missionData[1])
-    }
-}
+//struct MissionCardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MissionCardView(cardData: missionData[1])
+//    }
+//}

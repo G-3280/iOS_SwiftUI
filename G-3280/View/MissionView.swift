@@ -11,8 +11,8 @@ struct MissionView: View {
     
     @StateObject var missionViewModel = MissionViewModel()
     
-    @State private var selectedMission: missionInfo = .today
-    @State private var selectedMissionCategory: missionCategory = .none
+    @State private var selectedMissionCategory: missionCategory = .today
+    @State private var selectedMissionType: missionType = .none
     @Namespace private var missionAnimation
     @Namespace private var missionCategoryAnimation
     
@@ -22,7 +22,7 @@ struct MissionView: View {
         ZStack{
             Color.customBackGray
                 .edgesIgnoringSafeArea(.all)
-            VStack {
+            VStack(alignment: .center) {
                 VStack {
                     topBar
                     
@@ -33,14 +33,33 @@ struct MissionView: View {
                 .padding(.horizontal, 28)
                 .padding(.top, 20)
                 
-                List(missionViewModel.nowMission) { data in
-                    MissionCardView(cardData: data)
-                        .padding(.horizontal, 28)
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
-                        .shadow(color: Color.customGray ,radius: 5)
+                if missionViewModel.isLoading {
+                    LoadingView()
+                } else if !(missionViewModel.nowMission.isEmpty) {
+                    List(missionViewModel.nowMission) { data in
+                        MissionCardView(cardData: data)
+                            .frame(width: 341, height: 87)
+                            .padding(.horizontal, 28)
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                            .shadow(color: Color.customGray ,radius: 5)
+                    }
+                    .listStyle(.plain)
+                    .refreshable {
+                        Task {
+                            await missionViewModel.fetchMissions()
+                        }
+                        
+                        missionViewModel.updateNowMissionForCategory(category: selectedMissionCategory, type: selectedMissionType)
+                    }
+                    
+                } else {
+                    NotFoundDataView()
+                        .padding(.bottom, 100)
                 }
-                .listStyle(.plain)
+            }
+            .onAppear {
+                currentTime = missionViewModel.getCurrentTime()
             }
         }
             
@@ -50,7 +69,7 @@ struct MissionView: View {
     private var topBar: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(selectedMission == .today ? "Today" : "Weak")
+                Text(selectedMissionCategory == .today ? "Today" : "Weak")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 
@@ -68,18 +87,15 @@ struct MissionView: View {
             
             Text(currentTime)
                 .foregroundColor(.customMissionBarGray)
-                .onAppear {
-                    currentTime = missionViewModel.getCurrentTime()
-                }
         }
     }
     
     @ViewBuilder
     private var topMenuBar: some View {
         HStack {
-            ForEach(missionInfo.allCases, id: \.self) { item in
+            ForEach(missionCategory.allCases, id: \.self) { item in
                 ZStack {
-                    if selectedMission == item {
+                    if selectedMissionCategory == item {
                         Capsule()
                             .frame(height: 40)
                             .foregroundColor(.customMissionGreen)
@@ -89,13 +105,13 @@ struct MissionView: View {
                     Text(item.stringValue())
                         .frame(maxWidth: .infinity/4, minHeight: 50)
                         .font(.subheadline)
-                        .foregroundColor(selectedMission == item ? .black: .customMissionBarGray)
+                        .foregroundColor(selectedMissionCategory == item ? .black: .customMissionBarGray)
                 }
                 .onTapGesture {
                     withAnimation(.easeInOut) {
-                        self.selectedMission = item
-                        self.selectedMissionCategory = .none
-                        missionViewModel.updateNowMissionForCategory(info: selectedMission, category: selectedMissionCategory)
+                        self.selectedMissionCategory = item
+                        self.selectedMissionType = .none
+                        missionViewModel.updateNowMissionForCategory(category: selectedMissionCategory, type: selectedMissionType)
                     }
                 }
             }
@@ -105,9 +121,9 @@ struct MissionView: View {
     @ViewBuilder
     private var missionCategoryMenuBar: some View {
         HStack(spacing: 20) {
-            ForEach(missionCategory.allCases, id: \.self) { item in
+            ForEach(missionType.allCases, id: \.self) { item in
                 ZStack {
-                    if selectedMissionCategory == item {
+                    if selectedMissionType == item {
                         Capsule()
                             .frame(width: 50, height: 40)
                             .foregroundColor(.customMissionGreen)
@@ -116,22 +132,22 @@ struct MissionView: View {
                     
                     if item == .none {
                         Text(item.stringValue())
-                            .foregroundColor(selectedMissionCategory == item ? .black: .customMissionGray)
+                            .foregroundColor(selectedMissionType == item ? .black: .customMissionGray)
                             .frame(maxWidth: 20, maxHeight: 20)
                             .padding(.horizontal)
                         
                     } else {
-                        Image(selectedMissionCategory == item ? "seleted_\(item)" : "not_seleted_\(item)")
+                        Image(selectedMissionType == item ? "seleted_\(item)" : "not_seleted_\(item)")
                             .resizable()
                             .frame(maxWidth: 20, maxHeight: 20)
-                            .foregroundColor(selectedMissionCategory == item ? .black: .customMissionGray)
+                            .foregroundColor(selectedMissionType == item ? .black: .customMissionGray)
                             .padding(.horizontal)
                     }
                 }
                 .onTapGesture {
                     withAnimation(.easeInOut) {
-                        self.selectedMissionCategory = item
-                        missionViewModel.updateNowMissionForCategory(info: selectedMission, category: selectedMissionCategory)
+                        self.selectedMissionType = item
+                        missionViewModel.updateNowMissionForCategory(category: selectedMissionCategory, type: selectedMissionType)
                     }
                 }
             }

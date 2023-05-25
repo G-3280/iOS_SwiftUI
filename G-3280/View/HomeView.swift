@@ -14,6 +14,7 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             Color.customBackGray
+                .edgesIgnoringSafeArea(.all)
             VStack(alignment: .leading) {
                 VStack {
                     Text("안녕하세요!")

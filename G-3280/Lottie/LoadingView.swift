@@ -12,7 +12,7 @@ struct LoadingView: View {
         ZStack {
             Color.customBackGray
                 .edgesIgnoringSafeArea(.all)
-            LottieView(lottieFile: "Loading", loopMode: .loop)
+            LottieView(lottieFile: "Loading", loopMode: .loop, speed: 1.0)
                 .frame(width:300, height: 300)
                 .toolbar(.hidden)
         }
