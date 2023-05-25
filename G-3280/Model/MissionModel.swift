@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum missionInfo: String, CaseIterable {
+enum missionCategory: String, CaseIterable {
     case today = "today"
     case week = "week"
     
@@ -21,7 +21,7 @@ enum missionInfo: String, CaseIterable {
     }
 }
 
-enum missionCategory: String, CaseIterable {
+enum missionType: String, CaseIterable {
     case none = "none"
     case water = "water"
     case food = "food"
@@ -46,14 +46,9 @@ enum missionCategory: String, CaseIterable {
 
 struct Mission: Identifiable, Hashable{
     let id = UUID()
-    let type: String
-    let category: String
-    let name: String
+    let category: String // today, week
+    let type: String // water, food, electricity, recycle
+    let title: String
+    let description: String
     var isCompleted: Bool
 }
-
-let missionData: [Mission] = [Mission(type: "today", category: "water", name: "양치컵에 물을 받아서 양치해요!", isCompleted: true),
-                              Mission(type: "week", category: "food", name: "양치컵에 물을 받아서 양치해요!", isCompleted: false),
-                              Mission(type: "today", category: "electricity", name: "양치컵에 물을 받아서 양치해요!", isCompleted: false),
-                              Mission(type: "week", category: "water", name: "양치컵에 물을 받아서 양치해요!", isCompleted: false),
-                              Mission(type: "today", category: "food", name: "양치컵에 물을 받아서 양치해요!", isCompleted: false)]
