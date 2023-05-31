@@ -19,7 +19,6 @@
 		3F4B9F962A04EB0400E6AD03 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4B9F952A04EB0400E6AD03 /* SignUpView.swift */; };
 		3F4B9F982A04EB3300E6AD03 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4B9F972A04EB3300E6AD03 /* LottieView.swift */; };
 		3F4B9F9C2A04EB6200E6AD03 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4B9F9B2A04EB6200E6AD03 /* LoadingView.swift */; };
-		3F4B9F9E2A04EBB500E6AD03 /* Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B9F9D2A04EBB500E6AD03 /* Loading.json */; };
 		3F61AAD229FE397700AABC4D /* G_3280App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F61AAD129FE397700AABC4D /* G_3280App.swift */; };
 		3F61AAD429FE397700AABC4D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F61AAD329FE397700AABC4D /* ContentView.swift */; };
 		3F61AAD629FE397900AABC4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F61AAD529FE397900AABC4D /* Assets.xcassets */; };
@@ -57,7 +56,6 @@
 		3F4B9F952A04EB0400E6AD03 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		3F4B9F972A04EB3300E6AD03 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		3F4B9F9B2A04EB6200E6AD03 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		3F4B9F9D2A04EBB500E6AD03 /* Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Loading.json; path = ../../../../Downloads/Loading.json; sourceTree = "<group>"; };
 		3F61AACE29FE397700AABC4D /* G-3280.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "G-3280.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F61AAD129FE397700AABC4D /* G_3280App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G_3280App.swift; sourceTree = "<group>"; };
 		3F61AAD329FE397700AABC4D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 				3F61AAD129FE397700AABC4D /* G_3280App.swift */,
 				3F61AAD329FE397700AABC4D /* ContentView.swift */,
 				3F61AAD529FE397900AABC4D /* Assets.xcassets */,
-				3F4B9F9D2A04EBB500E6AD03 /* Loading.json */,
 				3F61AAD729FE397900AABC4D /* Preview Content */,
 			);
 			path = "G-3280";
@@ -269,7 +266,6 @@
 				3F61AAD929FE397900AABC4D /* Preview Assets.xcassets in Resources */,
 				3F7C968D2A0790F100C10436 /* GoogleService-Info.plist in Resources */,
 				3F61AAD629FE397900AABC4D /* Assets.xcassets in Resources */,
-				3F4B9F9E2A04EBB500E6AD03 /* Loading.json in Resources */,
 				3F2907382A1F2BB1006353BF /* NotFoundData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
