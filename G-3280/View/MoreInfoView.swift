@@ -12,8 +12,8 @@ struct MoreInfoView: View {
     @EnvironmentObject var userInfoViewModel: UserInfoViewModel
     @EnvironmentObject var authViewModel : AuthViewModel
     
-    @State var nowMissionCount: Double = 20
-    @State var totalMissionCount: Double = 20
+    @State var nowMissionCount: Double = 0
+    @State var totalMissionCount: Double = 0
     
     var body: some View {
         ZStack {
@@ -50,8 +50,16 @@ struct MoreInfoView: View {
             }
             .clipped()
             .padding(.top, 15)
+            .refreshable {
+                Task {
+                    await userInfoViewModel.fetchUser()
+                    self.nowMissionCount = Double(userInfoViewModel.user?.nowCompletedMissionCount ?? 0)
+                    self.totalMissionCount = Double(userInfoViewModel.user?.nowTotalMissionCount ?? 0)
+                }
+            }
             .onAppear {
-                //            print(viewModel.isLoggedIn)
+                self.nowMissionCount = Double(userInfoViewModel.user?.nowCompletedMissionCount ?? 0)
+                self.totalMissionCount = Double(userInfoViewModel.user?.nowTotalMissionCount ?? 0)
             }
         }
     }
@@ -143,7 +151,7 @@ struct MoreInfoView: View {
                     .font(.title3)
                     .fontWeight(.bold)
                     .padding(.bottom, 20)
-                    .padding(.leading, -15)
+                    .padding(.leading, -5)
  
                 HStack(spacing: 55) {
                     VStack {
@@ -153,7 +161,7 @@ struct MoreInfoView: View {
                             .frame(width: 54, height: 54)
                             .padding(.bottom, 15)
                         
-                        Text("10개")
+                        Text("\(Int(userInfoViewModel.user?.completedMission ?? 0))개")
                             .font(.title3)
                             .fontWeight(.bold)
                             .padding(.bottom, -3)
@@ -169,7 +177,7 @@ struct MoreInfoView: View {
                             .frame(width: 50, height:60)
                             .padding(.bottom, 9)
                         
-                        Text("5개")
+                        Text("\(Int(userInfoViewModel.user?.completedCard.count ?? 0))개")
                             .font(.title3)
                             .fontWeight(.bold)
                             .padding(.bottom, -3)
@@ -185,7 +193,7 @@ struct MoreInfoView: View {
                             .frame(width: 54, height: 54)
                             .padding(.bottom, 15)
                         
-                        Text("7개")
+                        Text("\(Int(userInfoViewModel.user?.completedEvaluation ?? 0))개")
                             .font(.title3)
                             .fontWeight(.bold)
                             .padding(.bottom, -3)

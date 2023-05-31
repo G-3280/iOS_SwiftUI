@@ -24,6 +24,8 @@ struct UserModel: Identifiable, Codable {
     var completedMission: Int
     var completedCard: [String]
     var completedEvaluation: Int
+    var nowCompletedMissionCount: Int
+    var nowTotalMissionCount: Int
     // 필요한 다른 필드를 여기에 추가하세요.
 
     init?(id: String? = nil, data: [String: Any]) {
@@ -32,7 +34,9 @@ struct UserModel: Identifiable, Codable {
             let nickName = data["userName"] as? String,
             let completedMission = data["completedMission"] as? Int,
             let completedCard = data["completedCard"] as? [String],
-            let completedEvaluation = data["completedEvaluation"] as? Int
+            let completedEvaluation = data["completedEvaluation"] as? Int,
+            let nowCompletedMissionCount = data["nowCompletedMissionCount"] as? Int,
+            let nowTotalMissionCount = data["nowTotalMissionCount"] as? Int
         else {
             return nil
         }
@@ -44,5 +48,7 @@ struct UserModel: Identifiable, Codable {
         self.completedMission = completedMission
         self.completedCard = completedCard
         self.completedEvaluation = completedEvaluation
+        self.nowCompletedMissionCount = nowCompletedMissionCount
+        self.nowTotalMissionCount = nowTotalMissionCount
     }
 }
