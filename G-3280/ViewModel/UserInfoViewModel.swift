@@ -12,6 +12,7 @@ class UserInfoViewModel: ObservableObject {
     @Published var user: UserModel?
     @Published var isLoading: Bool = false
     
+    
     private var db = Firestore.firestore()
 
     func fetchUser() async {

@@ -65,8 +65,6 @@ class MissionViewModel: ObservableObject {
         } catch {
             print("Error occurred while fetching missions: \(error)")
         }
-        
-        
     }
     
     /// 상단에 위치한 현재 날짜보여주기 위해 시간을 받아오는 함수
