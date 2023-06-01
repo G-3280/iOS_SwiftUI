@@ -13,7 +13,7 @@ struct NotFoundDataView: View {
             Color.customBackGray
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                LottieView(lottieFile: "NotFoundData", loopMode: .loop, speed: 1.8)
+                LottieView(lottieFile: "NotFoundData", loopMode: .playOnce, speed: 1.8)
                     .frame(width:200, height: 200)
                     .toolbar(.hidden)
                 
