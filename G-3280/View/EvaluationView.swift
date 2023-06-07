@@ -8,8 +8,27 @@
 import SwiftUI
 
 struct EvaluationView: View {
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView{
+            VStack{
+                Image("redFox")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                Text("다른 사람들의\n친환경 행동을 평가하러가요!")
+                    .font(.title)
+                    .fontWeight(.heavy)
+                    .multilineTextAlignment(.center)
+                    .bold()
+                NavigationLink(destination: InEvaluationView()) {
+                    Text("시작하기")
+                }.buttonStyle(.bordered)
+//                Button(action: }){
+//                    Text("시작하기")
+//                }.buttonStyle(.bordered)
+                //TabView
+            }
+        }
     }
 }
 
