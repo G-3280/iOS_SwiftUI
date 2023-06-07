@@ -9,72 +9,58 @@ import SwiftUI
 
 struct CharacterCardDetailView: View {
     
+    @Environment(\.presentationMode) var presentationMode
     var cardData: Character
     
     var body: some View {
         ZStack{
             Color.customBackGray
                 .edgesIgnoringSafeArea(.all)
-            VStack{
-                Image(cardData.image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                
-                Spacer()
-                ForEach(Array(cardData.species), id: \.self){ letter in
-                    Text(String(letter))
-                        .font(.subheadline)
-                }
-                ForEach(Array(cardData.name), id: \.self){ letter in
-                    Text(String(letter))
-                        .font(.title)
-                        .bold()
-                }
-                
-                Spacer()
-                
-                ForEach(Array(cardData.explanation), id: \.self){ letter in
-                    ScrollView{
-                        Text(String(letter))
+            
+            ScrollView {
+                VStack{
+                    Image(cardData.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding()
+                    
+                    Text(cardData.name)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .padding()
+                    
+                    VStack(alignment: .leading) {
+                        
+                        Text(cardData.species)
+                            .font(.title3)
+                            .fontWeight(.bold)
                             .padding()
+                        
+                        Text(cardData.explanation)
+                            .padding()
+                            
                     }
+                    .background {
+                        Rectangle()
+                            .foregroundColor(Color(hex: "F5F5F5"))
+                            .cornerRadius(20)
+                    }
+                    
                 }
-                .background(Rectangle()                    .foregroundColor(Color(hex: "F5F5F5"))
-                .cornerRadius(20))
                 .padding()
+                    
             }
-//            NavigationView{
-//                NavigationLink("카드눌러"){
-//                    VStack{
-//                        Image(cardData.image)
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fit)
-//
-//                        Spacer()
-//                        ForEach(Array(cardData.species), id: \.self){ letter in
-//                            Text(String(letter))
-//                                .font(.subheadline)
-//                        }
-//                        ForEach(Array(cardData.name), id: \.self){ letter in
-//                            Text(String(letter))
-//                                .font(.title)
-//                                .bold()
-//                        }
-//
-//                        Spacer()
-//
-//                        ForEach(Array(cardData.explanation), id: \.self){ letter in
-//                            ScrollView{
-//                                Text(String(letter))
-//                                    .padding()
-//                            }
-//                        }
-//                        .background(Rectangle()                    .foregroundColor(Color(hex: "F5F5F5"))
-//                        .cornerRadius(20))
-//                        .padding()
-//                    }
-//                }
-//            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "chevron.left")
+                    Text("홈")
+                }
+            }
         }
     }
 }
@@ -82,7 +68,7 @@ struct CharacterCardDetailView: View {
 
 struct CharacterCardDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CharacterCardDetailView(cardData: .penguin)
+        CharacterCardDetailView(cardData: .redFox)
 
     }
 }

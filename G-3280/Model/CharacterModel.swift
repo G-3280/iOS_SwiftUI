@@ -39,7 +39,7 @@ enum Character {
         case .penguin:
             return "뽀"
         case .redPanda:
-            return "호"
+            return "차오바오"
         case .redFox:
             return "호"
         case .polarBear:

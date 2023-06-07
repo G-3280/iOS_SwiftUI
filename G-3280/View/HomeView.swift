@@ -66,12 +66,10 @@ struct HomeView: View {
             ForEach(cards, id: \.self) { imageName in
                 if let character = Character(imageName: imageName) {
                     
-                    NavigationLink(destination: CharacterCardView(cardData: character)){
-                        
-                        CharacterCardDetailView(cardData: character)
+                    NavigationLink(destination: CharacterCardDetailView(cardData: character)){
+                        CharacterCardView(cardData: character)
                     }
-                    
-//                    CharacterCardView(cardData: character)
+                    .tint(.black)
                 }
             }.onAppear{
                 print(cards)
