@@ -65,7 +65,13 @@ struct HomeView: View {
         TabView {
             ForEach(cards, id: \.self) { imageName in
                 if let character = Character(imageName: imageName) {
-                    CharacterCardView(cardData: character)
+                    
+                    NavigationLink(destination: CharacterCardView(cardData: character)){
+                        
+                        CharacterCardDetailView(cardData: character)
+                    }
+                    
+//                    CharacterCardView(cardData: character)
                 }
             }.onAppear{
                 print(cards)

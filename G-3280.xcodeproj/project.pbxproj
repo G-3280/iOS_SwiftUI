@@ -41,6 +41,7 @@
 		3F7C96B22A0E3D7100C10436 /* MissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7C96B12A0E3D7100C10436 /* MissionViewModel.swift */; };
 		3F7C96B42A0E3E1100C10436 /* MissionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7C96B32A0E3E1100C10436 /* MissionCardView.swift */; };
 		3FF9D4982A023CA500973C55 /* CharacterCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9D4972A023CA500973C55 /* CharacterCardView.swift */; };
+		91E6B5E82A2719BD008E14D0 /* CharacterCardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E6B5E72A2719BD008E14D0 /* CharacterCardDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		3F7C96B12A0E3D7100C10436 /* MissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionViewModel.swift; sourceTree = "<group>"; };
 		3F7C96B32A0E3E1100C10436 /* MissionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionCardView.swift; sourceTree = "<group>"; };
 		3FF9D4972A023CA500973C55 /* CharacterCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCardView.swift; sourceTree = "<group>"; };
+		91E6B5E72A2719BD008E14D0 /* CharacterCardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCardDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				3F7C96982A0B35C400C10436 /* CompletedView.swift */,
 				3F04C1442A10D26600C49FE9 /* MoreInfoView.swift */,
 				3F04C14A2A110C4C00C49FE9 /* MissionProgressViewStyle.swift */,
+				91E6B5E72A2719BD008E14D0 /* CharacterCardDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				3F4B9F962A04EB0400E6AD03 /* SignUpView.swift in Sources */,
 				3F04C14F2A11E25100C49FE9 /* UserInfoViewModel.swift in Sources */,
 				3F2907362A1F27D2006353BF /* NotFoundDataView.swift in Sources */,
+				91E6B5E82A2719BD008E14D0 /* CharacterCardDetailView.swift in Sources */,
 				3F04C14D2A11DE8600C49FE9 /* UserModel.swift in Sources */,
 				3F7C968F2A07A80500C10436 /* AuthViewModel.swift in Sources */,
 				3F61AAEB29FE483900AABC4D /* Color+Extension.swift in Sources */,
