@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "asdf3.png",
+      "filename" : "emperorPenguin.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "emperorPenguin@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "emperorPenguin@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

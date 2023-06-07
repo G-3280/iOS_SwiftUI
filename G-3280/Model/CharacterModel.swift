@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum Character {
-    case penguin
+    case emperorPenguin
     case redPanda
     case redFox
     case polarBear
@@ -17,8 +17,8 @@ enum Character {
     
     init?(imageName: String) {
         switch imageName {
-        case "penguin":
-            self = .penguin
+        case "emperorPenguin":
+            self = .emperorPenguin
         case "redPanda":
             self = .redPanda
         case "redFox":
@@ -36,7 +36,7 @@ enum Character {
     
     var name: String {
         switch self {
-        case .penguin:
+        case .emperorPenguin:
             return "뽀"
         case .redPanda:
             return "차오바오"
@@ -53,7 +53,7 @@ enum Character {
     
     var species: String {
         switch self {
-        case .penguin:
+        case .emperorPenguin:
             return "황제팽귄"
         case .redPanda:
             return "랜서판다"
@@ -70,7 +70,7 @@ enum Character {
     
     var backColor: Color {
         switch self {
-        case .penguin:
+        case .emperorPenguin:
             return Color(hex: "F0D8D8")
         case .redPanda:
             return Color(hex: "CFF2C9")
@@ -87,8 +87,8 @@ enum Character {
     
     var image: String {
         switch self {
-        case .penguin:
-            return "penguin"
+        case .emperorPenguin:
+            return "emperorPenguin"
         case .redPanda:
             return "redPanda"
         case .redFox:
