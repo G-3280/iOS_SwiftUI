@@ -23,7 +23,7 @@ enum Character {
             self = .redPanda
         case "redFox":
             self = .redFox
-        case "PolarBear":
+        case "polarBear":
             self = .polarBear
         case "turtle":
             self = .turtle
@@ -94,7 +94,7 @@ enum Character {
         case .redFox:
             return "redFox"
         case .polarBear:
-            return "PolarBear"
+            return "polarBear"
         case .turtle:
             return "turtle"
         case .marten:

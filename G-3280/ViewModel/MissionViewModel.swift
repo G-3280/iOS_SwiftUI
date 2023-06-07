@@ -9,21 +9,94 @@ import Foundation
 import SwiftUI
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseStorage
 
 class MissionViewModel: ObservableObject {
     @Published var nowMission: [Mission] = []
     @Published var isLoading: Bool = true
+    @Published var image: UIImage?
+    @Published var isImageUpLoading: Bool = false
+    @Published var stack: [Int] = []
+    
+    @Published var selectedImage: UIImage? {
+        didSet {
+            handleSelectedImageChange()
+        }
+    }
     
     var firebaseMissionData: [Mission] = []
+    var selectedMissionDocumentID: String = ""
     
     let db = Firestore.firestore()
-    
+
     init() {
         Task {
             await fetchMissions()
         }
         updateNowMissionForCategory(category: .today, type: .none)
         print("초기화")
+    }
+    
+    func handleSelectedImageChange() {
+        Task {
+            await uploadImage()
+        }
+    }
+    
+    /// 인증하려는 미션에 사진 정보 올리기
+    func saveImageUrlToFirestore(documentID: String, uid: String, imageUrl: URL) async throws {
+        let db = Firestore.firestore()
+        let documentRef = db.collection("missionTest").document(documentID)
+        let usersCollectionRef = documentRef.collection("users")
+        let userDocumentRef = usersCollectionRef.document(uid)
+        
+        do {
+            try await userDocumentRef.setData(["imageUrl": imageUrl.absoluteString, "isCompleted": true], merge: true)
+            print("Image URL saved successfully")
+        } catch {
+            throw error
+        }
+    }
+    
+    /// Firebase Storage 에 사진 올리기
+    func uploadImage() async {
+        
+        guard let userUid = UserDefaults.standard.string(forKey: "user_uid"), !userUid.isEmpty else {
+            print("User UID is empty.")
+            return
+        }
+        
+        guard let image = selectedImage else { return print("사진없음")
+            await UITabBar.toogleTabBarVisibility()
+            
+//            await MainActor.run(body: {
+//                UITabBar.toogleTabBarVisibility()
+////                UITabBar.showTabBar(animated: false)
+//            })
+        }
+        
+        stack.append(1)
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
+        
+        let storageRef = Storage.storage().reference().child("\(userUid).jpg")
+        
+        do {
+            try await storageRef.putData(imageData)
+            let downloadURL = try await storageRef.downloadURL()
+            
+            try await saveImageUrlToFirestore(documentID: selectedMissionDocumentID, uid: userUid, imageUrl: downloadURL)
+            
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                
+                self.isImageUpLoading = true
+            }
+            
+            print("Image uploaded successfully.")
+        } catch {
+            print("Error uploading image: \(error.localizedDescription)")
+        }
+
     }
     
     /// FireStore의 mission 컬렉션에 user_uid 가 있는 미션 데이터를 불러옵니다
@@ -47,7 +120,7 @@ class MissionViewModel: ObservableObject {
                 
                 let userData = userDocument.data()
                 
-                let mission = Mission(category: missionDocument.get("category") as? String ?? "", type: missionDocument.get("type") as? String ?? "", title: missionDocument.get("title") as? String ?? "", description: missionDocument.get("description") as? String ?? "", isCompleted: userData?["isCompleted"] as? Bool ?? false)
+                let mission = Mission(documentID: missionDocument.documentID, category: missionDocument.get("category") as? String ?? "", type: missionDocument.get("type") as? String ?? "", title: missionDocument.get("title") as? String ?? "", description: missionDocument.get("description") as? String ?? "", isCompleted: userData?["isCompleted"] as? Bool ?? false)
                 
                 self.firebaseMissionData.append(mission)
                 

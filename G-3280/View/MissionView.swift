@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseStorage
+import HidableTabView
 
 struct MissionView: View {
     
@@ -16,55 +18,91 @@ struct MissionView: View {
     @Namespace private var missionAnimation
     @Namespace private var missionCategoryAnimation
     
+    @State private var showingConfirmation = false
+    
     @State private var currentTime: String = ""
+    @State var stack: [Int] = []
+    
+    @State private var showCamera = false
+    @State private var selectedUIImage: UIImage? = nil
     
     var body: some View {
-        ZStack{
-            Color.customBackGray
-                .edgesIgnoringSafeArea(.all)
-            VStack(alignment: .center) {
-                VStack {
-                    topBar
-                    
-                    topMenuBar
-                    
-                    missionCategoryMenuBar
-                }
-                .padding(.horizontal, 28)
-                .padding(.top, 20)
-                
-                if missionViewModel.isLoading {
-                    LoadingView()
-                } else if !(missionViewModel.nowMission.isEmpty) {
-                    List(missionViewModel.nowMission) { data in
-                        MissionCardView(cardData: data)
-                            .frame(width: 341, height: 87)
-                            .padding(.horizontal, 28)
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                            .shadow(color: Color.customGray ,radius: 5)
+        NavigationStack(path: $missionViewModel.stack) {
+            ZStack{
+                Color.customBackGray
+                    .edgesIgnoringSafeArea(.all)
+
+                VStack(alignment: .center) {
+                    VStack {
+                        topBar
+                        
+                        topMenuBar
+                        
+                        missionCategoryMenuBar
                     }
-                    .listStyle(.plain)
-                    .refreshable {
-                        Task {
-                            await missionViewModel.fetchMissions()
+                    .padding(.horizontal, 28)
+                    .padding(.top, 20)
+                    
+                    if missionViewModel.isLoading {
+                        LoadingView()
+                    } else if !(missionViewModel.nowMission.isEmpty) {
+                        List(missionViewModel.nowMission) { data in
+                            MissionCardView(cardData: data)
+                                .frame(width: 341, height: 87)
+                                .padding(.horizontal, 28)
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                                .shadow(color: Color.customGray ,radius: 5)
+                                .onTapGesture {
+                                    showingConfirmation = true
+                                    missionViewModel.selectedMissionDocumentID = data.documentID
+                                }
+                                .confirmationDialog("Change background", isPresented: $showingConfirmation) {
+                                    Button {
+                                        showCamera = true
+                                        UITabBar.toogleTabBarVisibility()
+                                    } label: {
+                                        Text("사진 촬영")
+                                    }
+                                    Button("취소", role: .cancel) { }
+                                } message: {
+                                    Text("미션 인증을 하시겠습니까?")
+                                }
+                                .fullScreenCover(isPresented: $showCamera) {
+                                    ImagePicker(selectedImage: $missionViewModel.selectedImage)
+                                        .ignoresSafeArea()
+                                }
+                        }
+                        .listStyle(.plain)
+                        .refreshable {
+                            Task {
+                                await missionViewModel.fetchMissions()
+                            }
+                            
+                            missionViewModel.updateNowMissionForCategory(category: selectedMissionCategory, type: selectedMissionType)
                         }
                         
-                        missionViewModel.updateNowMissionForCategory(category: selectedMissionCategory, type: selectedMissionType)
+                    } else {
+                        NotFoundDataView()
+                            .padding(.bottom, 100)
                     }
-                    
-                } else {
-                    NotFoundDataView()
-                        .padding(.bottom, 100)
+                }
+                .onAppear {
+                    currentTime = missionViewModel.getCurrentTime()
+//                    UITabBar.toogleTabBarVisibility()
                 }
             }
-            .onAppear {
-                currentTime = missionViewModel.getCurrentTime()
+        }.navigationDestination(for: Int.self) { int in
+            if missionViewModel.isImageUpLoading {
+                MissionCompletedView(stack: $missionViewModel.stack)
+            } else {
+                LoadingView()
+                    .transition(.move(edge: .trailing))
             }
         }
-            
+        
     }
-    
+
     @ViewBuilder
     private var topBar: some View {
         VStack(alignment: .leading) {

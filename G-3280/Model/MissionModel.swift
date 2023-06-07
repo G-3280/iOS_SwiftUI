@@ -46,6 +46,7 @@ enum missionType: String, CaseIterable {
 
 struct Mission: Identifiable, Hashable{
     let id = UUID()
+    let documentID: String
     let category: String // today, week
     let type: String // water, food, electricity, recycle
     let title: String

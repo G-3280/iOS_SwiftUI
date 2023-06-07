@@ -17,8 +17,37 @@ import FirebaseCore
 //  }
 //}
 
+class AppDelegateAdaptor: NSObject, UIApplicationDelegate {
+    var tabBarHidden = false
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        // 앱 시작 시 탭바를 보여줍니다.
+//        showTabBar()
+        
+        return true
+    }
+    
+    func hideTabBar() {
+        guard let window = UIApplication.shared.windows.first else { return }
+        guard let tabBarController = window.rootViewController as? UITabBarController else { return }
+        
+        tabBarController.tabBar.isHidden = true
+        tabBarHidden = true
+    }
+    
+    func showTabBar() {
+        guard let window = UIApplication.shared.windows.first else { return }
+        guard let tabBarController = window.rootViewController as? UITabBarController else { return }
+        
+        tabBarController.tabBar.isHidden = false
+        tabBarHidden = false
+    }
+}
+
 @main
 struct G_3280App: App {
+    
+    @UIApplicationDelegateAdaptor(AppDelegateAdaptor.self) var appDelegate
     
     init() {
         FirebaseApp.configure()
